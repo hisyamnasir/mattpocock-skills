@@ -6,7 +6,7 @@ One install story, one wording. `README.md`, `.changeset/*`, and every page unde
 
 Lead with installs that update themselves. Fall back to skills.sh, labelled "manual updates", only for agents that have no such install. Call a route managed only if it updates without the user running a command. Put any one-time opt-in beside its install command. Never promise "instant".
 
-Claude Code installs from its official marketplace, `claude-plugins-official`. Every other managed route installs from this repo's own marketplace, `.claude-plugin/marketplace.json` and `plugin.json`. Those routes reinstall only when the `version` in `plugin.json` changes. The Release workflow runs `npm run version`, which copies that field from `package.json`, so users get a release when the "chore: version skills" PR merges.
+Claude Code installs from its official marketplace, `claude-plugins-official`. Devin installs the repo itself, reading `.devin-plugin/plugin.json`, whose `skills` field names the two promoted bucket folders. It tracks the default branch rather than `version`, so Devin users get each merge to `main`, not each release. Every other managed route installs from this repo's own marketplace, `.claude-plugin/marketplace.json` and `plugin.json`. Those routes reinstall only when the `version` in `plugin.json` changes. The Release workflow runs `npm run version`, which copies that field from `package.json`, so users get a release when the "chore: version skills" PR merges.
 
 | Agent         | Route                            | Updates itself?                                                  |
 | ------------- | -------------------------------- | ---------------------------------------------------------------- |
@@ -14,6 +14,7 @@ Claude Code installs from its official marketplace, `claude-plugins-official`. E
 | Codex         | `@mattpocock` marketplace        | Yes, at startup, by default                                      |
 | Copilot CLI   | `@mattpocock` marketplace        | Yes, after a one-time `autoUpdate: true`                         |
 | VS Code       | Chat: Install Plugin From Source | Yes, daily, by default                                           |
+| Devin         | `devin plugins install` or Customize | Cloud sessions yes, at session start. CLI after `devin plugins update` |
 | Gemini CLI    | `gemini skills install` (copies) | No. A Gemini extension would need a flat `skills/<name>/` layout |
 | Everyone else | skills.sh                        | No. Run `npx skills update`, and re-run `add` for new skills     |
 
@@ -93,7 +94,7 @@ Re-run both commands to update.
 <canonical-block name="other-agents">
 
 ```bash
-npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, windsurf, amp, pi; omit -a to choose
 ```
 
 When the installer asks which skills to take, include `setup-matt-pocock-skills`. To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.

@@ -74,6 +74,17 @@ In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.c
 </details>
 
 <details>
+<summary><strong>Devin</strong> (CLI, Desktop and cloud sessions)</summary>
+
+```bash
+devin plugins install mattpocock/skills
+```
+
+Or in the web app, open **Customize → Plugins → Add plugin → From repository** and enter `mattpocock/skills`. Cloud sessions pick up new commits at session start; in the CLI, run `devin plugins update`.
+
+</details>
+
+<details>
 <summary><strong>Gemini CLI</strong> (manual updates)</summary>
 
 ```bash
@@ -89,7 +100,7 @@ Re-run both commands to update.
 <summary><strong>Any other agent, or editable files</strong> (manual updates)</summary>
 
 ```bash
-npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, windsurf, amp, pi; omit -a to choose
 ```
 
 When the installer asks which skills to take, include `setup-matt-pocock-skills`. To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
